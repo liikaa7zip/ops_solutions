@@ -1,10 +1,12 @@
 import tailwindcss from '@tailwindcss/vite';
-import {defineConfig} from 'vite';
+import { defineConfig } from 'vite';
 import { resolve } from 'path';
 
 export default defineConfig({
   plugins: [tailwindcss()],
   server: {
+    host: true, // 👈 IMPORTANT
+    allowedHosts: ['ops-solutions.onrender.com'], // 👈 ADD THIS
     hmr: process.env.DISABLE_HMR !== 'true',
   },
   build: {
