@@ -1,0 +1,533 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About | OPS Solution</title>
+    <link rel="stylesheet" href="/src/index.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+  </head>
+  <body class="bg-bg text-ink antialiased overflow-x-hidden">
+    <div class="relative min-h-screen">
+      <!-- Background Elements -->
+      <div class="fixed inset-0 noise-bg pointer-events-none z-0"></div>
+      <div class="fixed inset-0 grid-bg opacity-20 pointer-events-none z-0"></div>
+      <div class="fixed inset-0 bg-[radial-gradient(circle_at_90%_10%,rgba(59,130,246,0.1)_0%,transparent_70%)] pointer-events-none z-0"></div>
+
+      <!-- Header -->
+      <header class="fixed top-0 w-full z-50 flex items-center justify-between px-12 lg:px-32 py-6 transition-all duration-500">
+        <div class="flex items-center gap-12 max-w-[1700px] mx-auto w-full justify-between">
+          <div class="flex items-center gap-12">
+            <div class="width-12 h-8 flex items-center justify-center">
+            <img class="width-32 h-38 flex items-center justify-center" src="/src/assets/images/logo.png" alt="OPS Solution Logo">
+            </div>
+            <nav class="nav-container hidden lg:flex items-center gap-6">
+              <a href="/" class="nav-item font-sans text-[10px] uppercase tracking-widest">Home</a>
+              <a href="/about.html" class="nav-item active font-sans text-[10px] uppercase tracking-widest">About</a>
+              <div class="dropdown">
+                <a href="#" class="nav-item has-dropdown font-sans text-[10px] uppercase tracking-widest">Services</a>
+                <div class="dropdown-menu">
+                  <a href="/mobile-app.html" class="dropdown-item">Mobile Application</a>
+                  <a href="/website-development.html" class="dropdown-item">Website development</a>
+                  <a href="/product-design.html" class="dropdown-item">Products design</a>
+                </div>
+              </div>
+              <a href="/contact.html" class="nav-item font-sans text-[10px] uppercase tracking-widest">Contact</a>
+            </nav>
+          </div>
+
+          <div class="flex items-center gap-4">
+            <button id="theme-toggle" class="p-2.5 rounded-full bg-ink/5 border border-ink/10 hover:bg-ink/10 transition-all active:scale-95" aria-label="Toggle theme">
+              <i data-lucide="moon" class="w-5 h-5 dark-icon block"></i>
+              <i data-lucide="sun" class="w-5 h-5 light-icon hidden"></i>
+            </button>
+            <button id="mobile-menu-toggle" class="lg:hidden p-2.5 rounded-full bg-ink/5 border border-ink/10 hover:bg-ink/10 transition-all active:scale-95" aria-label="Toggle mobile menu">
+              <i data-lucide="menu" class="w-4 h-4 text-ink"></i>
+            </button>
+            <a href="/contact.html" class="hidden sm:block bg-accent hover:opacity-90 text-white px-6 py-2.5 rounded-full font-bold text-xs uppercase tracking-widest transition-all active:scale-95 text-center">
+              Start a project
+            </a>
+          </div>
+        </div>
+      </header>
+
+      <!-- Mobile Menu Overlay -->
+      <div id="mobile-menu" class="fixed inset-0 z-[60] bg-bg/95 backdrop-blur-2xl translate-x-full transition-transform duration-500 lg:hidden">
+        <div class="flex flex-col h-full p-12">
+          <div class="flex justify-between items-center mb-24">
+            <div class="text-2xl font-serif font-bold tracking-tight italic text-ink">OPS Solution</div>
+            <button id="mobile-menu-close" class="p-2.5 rounded-full bg-ink/5 border border-ink/10">
+              <i data-lucide="x" class="w-6 h-6 text-ink"></i>
+            </button>
+          </div>
+          
+          <nav class="flex flex-col gap-8">
+            <a href="/" class="text-4xl font-serif italic text-ink hover:text-accent transition-colors">Home</a>
+            <a href="/about.html" class="text-4xl font-serif italic text-ink hover:text-accent transition-colors">About</a>
+            <div class="flex flex-col gap-4">
+              <span class="text-[10px] font-sans font-bold uppercase tracking-[0.3em] text-muted">Services</span>
+              <div class="flex flex-col gap-4 pl-4 border-l border-ink/10">
+                <a href="/mobile-app.html" class="text-2xl font-serif italic text-ink hover:text-accent transition-colors">Mobile Application</a>
+                <a href="/website-development.html" class="text-2xl font-serif italic text-ink hover:text-accent transition-colors">Website development</a>
+                <a href="/product-design.html" class="text-2xl font-serif italic text-ink hover:text-accent transition-colors">Products design</a>
+              </div>
+            </div>
+            <a href="/contact.html" class="text-4xl font-serif italic text-ink hover:text-accent transition-colors">Contact</a>
+          </nav>
+
+          <div class="mt-auto pt-12 border-t border-ink/10">
+            <a href="/contact.html" class="block w-full bg-accent text-white py-6 rounded-full font-bold text-sm uppercase tracking-widest text-center">
+              Start a project
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- About Hero -->
+      <main class="relative z-10 max-w-[1700px] mx-auto px-12 lg:px-32 pt-48 pb-32 overflow-hidden">
+        <!-- Atmospheric Background -->
+        <div class="atmospheric-banner"></div>
+        <div class="atmospheric-banner-extra"></div>
+        
+        <div class="flex flex-col items-center text-center relative z-10">
+          <div class="flex items-center gap-4 mb-8 reveal">
+            <div class="h-[1px] w-12 bg-accent"></div>
+            <span class="text-[10px] font-sans font-bold tracking-[0.3em] uppercase text-muted">Our Identity</span>
+            <div class="h-[1px] w-12 bg-accent"></div>
+          </div>
+          
+          <h1 class="font-serif text-4xl lg:text-[120px] leading-[0.9] italic mb-12 reveal">
+            We are <span class="text-accent-light">architects</span> <br />
+            of the digital age.
+          </h1>
+          
+          <p class="text-muted font-light max-w-2xl text-xs lg:text-lg leading-relaxed reveal delay-200">
+            Based at the intersection of technical precision and creative intuition, OPS Solution builds the infrastructure that powers tomorrow's industry leaders.
+          </p>
+        </div>
+      </main>
+
+      <!-- Studio Stats -->
+      <section class="py-24 px-12 lg:px-32 relative z-10 reveal">
+        <div class="max-w-[1700px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-12 border-y border-ink/5 py-16 text-xs lg:text-lg">
+          <div class="text-center">
+            <div class="text-3xl lg:text-5xl font-serif italic text-accent-light mb-2">150+</div>
+            <div class="text-[10px] font-sans font-bold uppercase tracking-widest text-muted">Projects Delivered</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl lg:text-5xl font-serif italic text-accent-light mb-2">12</div>
+            <div class="text-[10px] font-sans font-bold uppercase tracking-widest text-muted">Global Awards</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl lg:text-5xl font-serif italic text-accent-light mb-2">98%</div>
+            <div class="text-[10px] font-sans font-bold uppercase tracking-widest text-muted">Client Retention</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl lg:text-5xl font-serif italic text-accent-light mb-2">24/7</div>
+            <div class="text-[10px] font-sans font-bold uppercase tracking-widest text-muted">System Support</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Engineering & Experience -->
+      <section class="min-h-screen flex items-center px-12 lg:px-32 relative overflow-hidden reveal">
+        <div class="max-w-[1700px] mx-auto grid lg:grid-cols-12 gap-24 items-center">
+          <!-- Visual Column (Left) -->
+          <div class="relative order-2 lg:order-1 lg:col-span-5">
+            <div class="relative aspect-square max-w-xl mx-auto bg-bg rounded-[3rem] border border-ink/5 p-10 shadow-2xl overflow-hidden group">
+              <div class="absolute inset-0 bg-gradient-to-tr from-accent/10 to-transparent opacity-50"></div>
+              
+              <!-- Terminal Interface -->
+              <div class="h-full flex flex-col font-mono text-xs lg:text-sm leading-relaxed text-muted">
+                <div class="flex items-center gap-3 mb-8 text-muted/80">
+                  <i data-lucide="terminal" class="w-4 h-4 text-accent-light"></i>
+                  <span class="uppercase tracking-widest">ops_core_v2.0</span>
+                </div>
+
+                <div class="space-y-3 terminal-container">
+                  <div class="flex gap-4 terminal-line opacity-0" data-delay="0">
+                    <span class="text-accent-light/50">08:06:04</span>
+                    <span class="text-ink">Initializing cloud_cluster...</span>
+                  </div>
+                  <div class="flex gap-4 terminal-line opacity-0" data-delay="800">
+                    <span class="text-accent-light/50">08:06:05</span>
+                    <span class="text-green-500">DONE</span>
+                    <span class="text-muted">Nodes: 128 active</span>
+                  </div>
+                  <div class="flex gap-4 terminal-line opacity-0" data-delay="1600">
+                    <span class="text-accent-light/50">08:06:07</span>
+                    <span class="text-ink">Injecting aesthetic_layer...</span>
+                  </div>
+                  <div class="flex gap-4 terminal-line opacity-0" data-delay="2400">
+                    <span class="text-accent-light/50">08:06:08</span>
+                    <span class="text-accent-light">SYNC</span>
+                    <span class="text-muted">UX_Precision: 100%</span>
+                  </div>
+                  <div class="mt-8 pt-8 border-t border-ink/5 terminal-line opacity-0" data-delay="3200">
+                    <div class="text-ink mb-2">Architecture Status:</div>
+                    <div class="w-full h-1 bg-ink/5 rounded-full overflow-hidden">
+                      <div class="h-full bg-accent terminal-progress" style="width: 0%"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Abstract Nodes -->
+                <div class="mt-auto grid grid-cols-4 gap-4">
+                  <div class="aspect-square rounded-xl bg-ink/5 border border-ink/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
+                    <div class="w-1.5 h-1.5 rounded-full bg-accent shadow-[0_0_10px_rgba(30,90,154,0.5)]"></div>
+                  </div>
+                  <div class="aspect-square rounded-xl bg-ink/5 border border-ink/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
+                    <div class="w-1.5 h-1.5 rounded-full bg-accent shadow-[0_0_10px_rgba(30,90,154,0.5)]"></div>
+                  </div>
+                  <div class="aspect-square rounded-xl bg-ink/5 border border-ink/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
+                    <div class="w-1.5 h-1.5 rounded-full bg-accent shadow-[0_0_10px_rgba(30,90,154,0.5)]"></div>
+                  </div>
+                  <div class="aspect-square rounded-xl bg-ink/5 border border-ink/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
+                    <div class="w-1.5 h-1.5 rounded-full bg-accent shadow-[0_0_10px_rgba(30,90,154,0.5)]"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- New Labels -->
+              <div class="absolute bottom-10 right-10 flex items-center gap-4">
+                <div class="text-[10px] font-sans font-bold uppercase tracking-[0.2em] text-muted">[ infra ]</div>
+                <div class="w-8 h-[1px] bg-ink/20"></div>
+                <div class="text-[10px] font-sans font-bold uppercase tracking-[0.2em] text-accent-light">[ experience ]</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Text Column (Right) -->
+          <div class="max-w-2xl order-1 lg:order-2 lg:col-span-7 flex flex-col items-center text-center">
+            <div class="flex items-center gap-4 mb-8 justify-center">
+            <div class="h-[1px] w-12 bg-accent"></div>
+            <span class="text-[10px] font-sans font-bold tracking-[0.3em] uppercase text-muted">Our Methodology</span>
+            </div>
+            <h2 class="text-3xl lg:text-6xl font-serif italic mb-12 leading-tight">Engineering at scale, <br /><span class="text-accent-light">designed for humans.</span></h2>
+            
+            <p class="text-xs lg:text-lg text-muted font-light leading-relaxed mb-8">
+              We don't just build applications; we architect digital foundations. Our approach combines the industrial-grade robustness of enterprise infrastructure with the refined elegance of modern product design.
+            </p>
+            
+            <p class="text-xs lg:text-lg text-muted font-light leading-relaxed">
+              At OPS Solution, we believe that the most powerful systems are the ones that disappear into the background. We obsess over uptime, latency, and security, so your users can focus on what matters most.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Values Bento Grid -->
+
+      <!-- Values Bento Grid -->
+      <section class="py-32 px-12 lg:px-32 bg-bg reveal">
+        <div class="max-w-[1700px] mx-auto">
+          <div class="text-center mb-24">
+            <h2 class="text-3xl lg:text-7xl font-serif italic mb-6">Our Core <span class="text-accent-light">Values</span></h2>
+            <p class="text-xs lg:text-lg text-muted font-light leading-relaxed">The principles that guide our craftsmanship.</p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="p-12 rounded-[2.5rem] bg-ink/[0.02] border border-ink/5 hover:border-accent/30 transition-all duration-700 group reveal">
+              <div class="w-14 h-14 rounded-2xl bg-accent/10 flex items-center justify-center mb-12 group-hover:scale-110 transition-transform">
+                <i data-lucide="zap" class="w-6 h-6 text-accent"></i>
+              </div>
+              <h3 class="text-2xl font-serif italic mb-6">Velocity</h3>
+              <p class="text-xs lg:text-sm text-muted font-light leading-relaxed">Moving fast without breaking things. We deliver high-quality results at the speed of your business.</p>
+            </div>
+
+            <div class="p-12 rounded-[2.5rem] bg-ink/[0.02] border border-ink/5 hover:border-accent/30 transition-all duration-700 group reveal delay-100">
+              <div class="w-14 h-14 rounded-2xl bg-accent/10 flex items-center justify-center mb-12 group-hover:scale-110 transition-transform">
+                <i data-lucide="shield" class="w-6 h-6 text-accent"></i>
+              </div>
+              <h3 class="text-2xl font-serif italic mb-6">Integrity</h3>
+              <p class="text-xs lg:text-lg text-muted font-light leading-relaxed">Security and privacy are baked into our DNA. We build systems you can trust with your most sensitive data.</p>
+            </div>
+
+            <div class="p-12 rounded-[2.5rem] bg-ink/[0.02] border border-ink/5 hover:border-accent/30 transition-all duration-700 group reveal delay-200">
+              <div class="w-14 h-14 rounded-2xl bg-accent/10 flex items-center justify-center mb-12 group-hover:scale-110 transition-transform">
+                <i data-lucide="refresh-cw" class="w-6 h-6 text-accent"></i>
+              </div>
+              <h3 class="text-2xl font-serif italic mb-6">Evolution</h3>
+              <p class="text-xs lg:text-lg text-muted font-light leading-relaxed">Technology never stops moving, and neither do we. Continuous learning is at the heart of our studio.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Team Section: Framed Interactive Row -->
+      <section class="py-48 px-12 lg:px-32 relative overflow-hidden reveal bg-bg">
+        <!-- Decorative Background Line -->
+        <div class="absolute top-1/2 left-0 w-full h-[1px] bg-accent/10 -translate-y-1/2 z-0"></div>
+
+        <div class="max-w-[1700px] mx-auto relative z-10">
+          <div class="text-left mb-32">
+            <div class="flex items-center gap-4 mb-6">
+              <div class="h-[1px] w-12 bg-accent"></div>
+              <span class="text-[10px] font-sans font-bold tracking-[0.3em] uppercase text-accent-light">The Collective</span>
+            </div>
+            <h2 class="text-3xl lg:text-6xl font-serif italic text-ink leading-tight">Meet the <br /><span class="text-accent-light">experts.</span></h2>
+          </div>
+
+          <div class="relative group/carousel">
+            <!-- Navigation Buttons: Positioned Left & Right -->
+            <button id="prevTeam" class="absolute left-0 top-[200px] -translate-y-1/2 -translate-x-1/2 w-14 h-14 rounded-full border border-ink/10 bg-bg/80 backdrop-blur-md flex items-center justify-center hover:bg-accent hover:border-accent transition-all active:scale-90 z-50 group opacity-0 group-hover/carousel:opacity-100 group-hover/carousel:-translate-x-full md:group-hover/carousel:-translate-x-1/2">
+              <i data-lucide="chevron-left" class="w-6 h-6 text-ink group-hover:scale-110 transition-transform"></i>
+            </button>
+            <button id="nextTeam" class="absolute right-0 top-[200px] -translate-y-1/2 translate-x-1/2 w-14 h-14 rounded-full border border-ink/10 bg-bg/80 backdrop-blur-md flex items-center justify-center hover:bg-accent hover:border-accent transition-all active:scale-90 z-50 group opacity-0 group-hover/carousel:opacity-100 group-hover/carousel:translate-x-full md:group-hover/carousel:translate-x-1/2">
+              <i data-lucide="chevron-right" class="w-6 h-6 text-ink group-hover:scale-110 transition-transform"></i>
+            </button>
+
+            <!-- Horizontal Scrollable Container -->
+            <div id="teamContainer" class="flex gap-16 overflow-x-auto pb-20 no-scrollbar snap-x snap-mandatory scroll-smooth">
+            
+            <!-- Team Member 1 -->
+            <div class="flex-none w-[320px] snap-center group">
+              <div class="relative h-[400px] mb-12 flex items-end justify-center">
+                <!-- Outer Tech Frame -->
+                <div class="absolute inset-0 border-2 border-accent/40 z-30 pointer-events-none transition-all duration-500 group-hover:border-accent group-hover:scale-105"></div>
+                
+                <!-- Inner White Box (The "Card") -->
+                <div class="absolute top-12 left-4 right-4 bottom-4 bg-white z-10"></div>
+                
+                <!-- Corner Brackets -->
+                <div class="absolute top-2 left-2 w-6 h-6 border-t-2 border-l-2 border-accent z-40"></div>
+                <div class="absolute bottom-2 right-2 w-6 h-6 border-b-2 border-r-2 border-accent z-40"></div>
+                
+                <!-- Person (Popping out) -->
+                <div class="relative w-full h-[115%] z-20 overflow-visible mb-4">
+                  <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=600&h=800" alt="Alex Rivers" class="h-full w-full object-contain object-bottom mix-blend-multiply transition-all duration-700 group-hover:scale-110" referrerPolicy="no-referrer">
+                </div>
+              </div>
+              
+              <div class="text-center">
+                <h4 class="text-2xl font-sans font-bold tracking-[0.1em] text-ink uppercase mb-1">Alex Rivers</h4>
+                <p class="text-[10px] font-sans font-bold tracking-[0.3em] text-muted uppercase mb-4">CEO</p>
+                <div class="w-16 h-[1px] bg-accent mx-auto mb-6"></div>
+                <p class="text-xs lg:text-lg text-muted leading-relaxed max-w-[260px] mx-auto font-light">Pioneering digital architecture with a focus on scalable, high-performance infrastructure.</p>
+              </div>
+            </div>
+
+            <!-- Team Member 2 -->
+            <div class="flex-none w-[320px] snap-center group">
+              <div class="relative h-[400px] mb-12 flex items-end justify-center">
+                <div class="absolute inset-0 border-2 border-accent/40 z-30 pointer-events-none transition-all duration-500 group-hover:border-accent group-hover:scale-105"></div>
+                <div class="absolute top-12 left-4 right-4 bottom-4 bg-white z-10"></div>
+                <div class="absolute top-2 left-2 w-6 h-6 border-t-2 border-l-2 border-accent z-40"></div>
+                <div class="absolute bottom-2 right-2 w-6 h-6 border-b-2 border-r-2 border-accent z-40"></div>
+                
+                <div class="relative w-full h-[115%] z-20 overflow-visible mb-4">
+                  <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=600&h=800" alt="Sarah Chen" class="h-full w-full object-contain object-bottom mix-blend-multiply transition-all duration-700 group-hover:scale-110" referrerPolicy="no-referrer">
+                </div>
+              </div>
+              
+              <div class="text-center">
+                <h4 class="text-2xl font-sans font-bold tracking-[0.1em] text-ink uppercase mb-1">Sarah Chen</h4>
+                <p class="text-[10px] font-sans font-bold tracking-[0.3em] text-muted uppercase mb-4">Marketing</p>
+                <div class="w-16 h-[1px] bg-accent mx-auto mb-6"></div>
+                <p class="text-xs lg:text-lg text-muted leading-relaxed max-w-[260px] mx-auto font-light">Merging human-centric design with technical precision to create immersive digital experiences.</p>
+              </div>
+            </div>
+
+            <!-- Team Member 3 -->
+            <div class="flex-none w-[320px] snap-center group">
+              <div class="relative h-[400px] mb-12 flex items-end justify-center">
+                <div class="absolute inset-0 border-2 border-accent/40 z-30 pointer-events-none transition-all duration-500 group-hover:border-accent group-hover:scale-105"></div>
+                <div class="absolute top-12 left-4 right-4 bottom-4 bg-white z-10"></div>
+                <div class="absolute top-2 left-2 w-6 h-6 border-t-2 border-l-2 border-accent z-40"></div>
+                <div class="absolute bottom-2 right-2 w-6 h-6 border-b-2 border-r-2 border-accent z-40"></div>
+                
+                <div class="relative w-full h-[115%] z-20 overflow-visible mb-4">
+                  <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=600&h=800" alt="Marcus Thorne" class="h-full w-full object-contain object-bottom mix-blend-multiply transition-all duration-700 group-hover:scale-110" referrerPolicy="no-referrer">
+                </div>
+              </div>
+              
+              <div class="text-center">
+                <h4 class="text-2xl font-sans font-bold tracking-[0.1em] text-ink uppercase mb-1">Marcus Thorne</h4>
+                <h4 class="text-2xl font-sans font-bold tracking-[0.1em] text-ink uppercase mb-1">Marcus Thorne</h4>
+                <p class="text-[10px] font-sans font-bold tracking-[0.3em] text-muted uppercase mb-4">CTO</p>
+                <div class="w-16 h-[1px] bg-accent mx-auto mb-6"></div>
+                <p class="text-xs lg:text-lg text-muted leading-relaxed max-w-[260px] mx-auto font-light">Specializing in the invisible systems that ensure reliability and security at scale.</p>
+              </div>
+            </div>
+
+            <!-- Team Member 4 -->
+            <div class="flex-none w-[320px] snap-center group">
+              <div class="relative h-[400px] mb-12 flex items-end justify-center">
+                <div class="absolute inset-0 border-2 border-accent/40 z-30 pointer-events-none transition-all duration-500 group-hover:border-accent group-hover:scale-105"></div>
+                <div class="absolute top-12 left-4 right-4 bottom-4 bg-white z-10"></div>
+                <div class="absolute top-2 left-2 w-6 h-6 border-t-2 border-l-2 border-accent z-40"></div>
+                <div class="absolute bottom-2 right-2 w-6 h-6 border-b-2 border-r-2 border-accent z-40"></div>
+                
+                <div class="relative w-full h-[115%] z-20 overflow-visible mb-4">
+                  <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=600&h=800" alt="Elena Vance" class="h-full w-full object-contain object-bottom mix-blend-multiply transition-all duration-700 group-hover:scale-110" referrerPolicy="no-referrer">
+                </div>
+              </div>
+              
+              <div class="text-center">
+                <h4 class="text-2xl font-sans font-bold tracking-[0.1em] text-ink uppercase mb-1">Elena Vance</h4>
+                <p class="text-[10px] font-sans font-bold tracking-[0.3em] text-muted uppercase mb-4">AI Specialist</p>
+                <div class="w-16 h-[1px] bg-accent mx-auto mb-6"></div>
+                <p class="text-xs lg:text-lg text-muted leading-relaxed max-w-[260px] mx-auto font-light">Driving innovation through advanced machine learning and data-driven intuition.</p>
+              </div>
+            </div>
+
+            <!-- Team Member 5 -->
+            <div class="flex-none w-[320px] snap-center group">
+              <div class="relative h-[400px] mb-12 flex items-end justify-center">
+                <div class="absolute inset-0 border-2 border-accent/40 z-30 pointer-events-none transition-all duration-500 group-hover:border-accent group-hover:scale-105"></div>
+                <div class="absolute top-12 left-4 right-4 bottom-4 bg-white z-10"></div>
+                <div class="absolute top-2 left-2 w-6 h-6 border-t-2 border-l-2 border-accent z-40"></div>
+                <div class="absolute bottom-2 right-2 w-6 h-6 border-b-2 border-r-2 border-accent z-40"></div>
+                
+                <div class="relative w-full h-[115%] z-20 overflow-visible mb-4">
+                  <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=600&h=800" alt="Julian Marsh" class="h-full w-full object-contain object-bottom mix-blend-multiply transition-all duration-700 group-hover:scale-110" referrerPolicy="no-referrer">
+                </div>
+              </div>
+              
+              <div class="text-center">
+                <h4 class="text-2xl font-sans font-bold tracking-[0.1em] text-ink uppercase mb-1">Julian Marsh</h4>
+                <p class="text-[10px] font-sans font-bold tracking-[0.3em] text-muted uppercase mb-4">Creative Director</p>
+                <div class="w-16 h-[1px] bg-accent mx-auto mb-6"></div>
+                <p class="text-xs lg:text-lg text-muted leading-relaxed max-w-[260px] mx-auto font-light">Crafting visual narratives that bridge the gap between technology and emotion.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          const container = document.getElementById('teamContainer');
+          const prevBtn = document.getElementById('prevTeam');
+          const nextBtn = document.getElementById('nextTeam');
+
+          if (container && prevBtn && nextBtn) {
+            const scrollAmount = 384; // 320px width + 64px gap
+            
+            prevBtn.addEventListener('click', () => {
+              container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+            });
+
+            nextBtn.addEventListener('click', () => {
+              container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+            });
+          }
+        });
+      </script>
+
+      <!-- Section: Call to Action -->
+      <section class="py-48 px-12 lg:px-32 relative overflow-hidden bg-bg reveal">
+        <!-- Atmospheric Background -->
+        <div class="atmospheric-banner opacity-10"></div>
+        <div class="atmospheric-banner-extra opacity-5"></div>
+        
+        <div class="max-w-[1700px] mx-auto text-center relative z-10">
+          <div class="flex items-center justify-center gap-4 mb-12">
+            <div class="h-[1px] w-12 bg-accent"></div>
+            <span class="text-[10px] font-sans font-bold tracking-[0.3em] uppercase text-muted">Next Step</span>
+            <div class="h-[1px] w-12 bg-accent"></div>
+          </div>
+          
+          <h2 class="text-4xl lg:text-[120px] font-serif italic leading-[0.9] mb-16 text-ink">
+            Ready to build <br />
+            <span class="text-accent-light">the future?</span>
+          </h2>
+          
+          <a href="/contact.html" class="group relative inline-flex items-center gap-6 bg-accent hover:opacity-90 text-white px-12 py-6 rounded-full font-bold text-sm uppercase tracking-[0.2em] transition-all active:scale-95">
+            Start a project
+            <div class="w-8 h-8 rounded-full bg-ink/20 flex items-center justify-center group-hover:translate-x-2 transition-transform">
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </div>
+          </a>
+        </div>
+      </section>
+
+    <!-- Footer -->
+    <footer class="bg-bg pt-32 pb-12 px-12 lg:px-32 border-t border-ink/5">
+      <div class="max-w-[1700px] mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-16 mb-32">
+          <!-- Brand Column -->
+          <div class="md:col-span-4">
+            <div class="text-3xl font-serif font-bold tracking-tight italic mb-8 text-ink">OPS Solution</div>
+            <p class="text-muted font-light text-xs lg:text-lg leading-relaxed max-w-xs">
+              Crafting exceptional digital experiences through technical excellence and creative vision.
+            </p>
+          </div>
+
+          <!-- Links Columns -->
+            <div class="md:col-span-2">
+              <h5 class="text-[10px] font-sans font-bold uppercase tracking-[0.2em] text-ink mb-8">Company</h5>
+              <ul class="space-y-4">
+                <li><a href="/" class="text-sm text-muted hover:text-accent-light transition-colors">Home</a></li>
+                <li><a href="/about.html" class="text-sm text-muted hover:text-accent-light transition-colors">About</a></li>
+                <li><a href="/contact.html" class="text-sm text-muted hover:text-accent-light transition-colors">Contact</a></li>
+                <li><a href="/contact.html" class="text-sm text-muted hover:text-accent-light transition-colors">Start a project</a></li>
+              </ul>
+            </div>
+
+          <div class="md:col-span-2">
+            <h5 class="text-[10px] font-sans font-bold uppercase tracking-[0.2em] text-ink mb-8">Services</h5>
+            <ul class="space-y-4">
+              <li><a href="/mobile-app.html" class="text-sm text-muted hover:text-accent-light transition-colors">Mobile Application</a></li>
+              <li><a href="/website-development.html" class="text-sm text-muted hover:text-accent-light transition-colors">Website Development</a></li>
+              <li><a href="/product-design.html" class="text-sm text-muted hover:text-accent-light transition-colors">Product Design</a></li>
+            </ul>
+          </div>
+
+          <!-- Contact Column -->
+          <div class="md:col-span-4">
+            <h5 class="text-[10px] font-sans font-bold uppercase tracking-[0.2em] text-ink mb-8">Connect</h5>
+            <div class="space-y-6">
+              <a href="mailto:hello@opssolution.com" class="block text-2xl font-serif italic hover:text-accent-light transition-colors text-ink">hello@opssolution.com</a>
+              <div class="flex gap-6">
+                <a href="#" class="w-10 h-10 rounded-full border border-ink/10 flex items-center justify-center hover:bg-accent hover:border-accent transition-all text-ink">
+                  <i data-lucide="twitter" class="w-4 h-4"></i>
+                </a>
+                <a href="#" class="w-10 h-10 rounded-full border border-ink/10 flex items-center justify-center hover:bg-accent hover:border-accent transition-all text-ink">
+                  <i data-lucide="linkedin" class="w-4 h-4"></i>
+                </a>
+                <a href="#" class="w-10 h-10 rounded-full border border-ink/10 flex items-center justify-center hover:bg-accent hover:border-accent transition-all text-ink">
+                  <i data-lucide="instagram" class="w-4 h-4"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Bar -->
+        <div class="pt-12 border-t border-ink/5 flex flex-col md:flex-row justify-between items-center gap-8">
+          <div class="text-[10px] font-sans uppercase tracking-widest text-muted">
+            © 2026 OPS Solution. All rights reserved.
+          </div>
+          <div class="flex gap-8">
+            <a href="#" class="text-[10px] font-sans uppercase tracking-widest text-muted hover:text-ink transition-colors">Privacy Policy</a>
+            <a href="#" class="text-[10px] font-sans uppercase tracking-widest text-muted hover:text-ink transition-colors">Terms of Service</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    </div>
+
+    <script src="/src/main.js" type="module"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+      // Team Scroll Logic
+      const teamContainer = document.getElementById('teamContainer');
+      const prevBtn = document.getElementById('prevTeam');
+      const nextBtn = document.getElementById('nextTeam');
+
+      if (teamContainer && prevBtn && nextBtn) {
+        const scrollAmount = 384; // Card width (320) + gap (64)
+
+        prevBtn.addEventListener('click', () => {
+          teamContainer.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        });
+
+        nextBtn.addEventListener('click', () => {
+          teamContainer.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        });
+      }
+    </script>
+  </body>
+</html>

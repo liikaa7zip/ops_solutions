@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Start a Project | OPS Solution</title>
+    <link rel="stylesheet" href="/src/index.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+  </head>
+  <body class="bg-bg text-ink antialiased overflow-x-hidden">
+    <div class="relative min-h-screen">
+      <!-- Background Elements -->
+      <div class="fixed inset-0 noise-bg pointer-events-none z-0"></div>
+      <div class="fixed inset-0 grid-bg opacity-20 pointer-events-none z-0"></div>
+      <div class="fixed inset-0 bg-[radial-gradient(circle_at_90%_10%,rgba(56, 189, 248, 0.1)_0%,transparent_70%)] pointer-events-none z-0"></div>
+
+      <!-- Header -->
+      <header class="fixed top-0 w-full z-50 flex items-center justify-between px-12 lg:px-32 py-6 transition-all duration-500">
+        <div class="flex items-center gap-12 max-w-[1700px] mx-auto w-full justify-between">
+          <div class="flex items-center gap-12">
+            <a href="/" class="text-2xl font-serif font-bold tracking-tight italic text-ink">OPS Solution</a>
+            <nav class="nav-container hidden lg:flex items-center gap-6">
+              <a href="/" class="nav-item font-sans text-[10px] uppercase tracking-widest">Home</a>
+              <a href="/about.html" class="nav-item font-sans text-[10px] uppercase tracking-widest">About</a>
+              <div class="dropdown">
+                <a href="#" class="nav-item has-dropdown font-sans text-[10px] uppercase tracking-widest">Services</a>
+                <div class="dropdown-menu">
+                  <a href="/mobile-app.html" class="dropdown-item">Mobile Application</a>
+                  <a href="/website-development.html" class="dropdown-item">Website development</a>
+                  <a href="/product-design.html" class="dropdown-item">Products design</a>
+                </div>
+              </div>
+              <a href="/contact.html" class="nav-item font-sans text-[10px] uppercase tracking-widest">Contact</a>
+            </nav>
+          </div>
+
+          <div class="flex items-center gap-4">
+            <button id="theme-toggle" class="p-2.5 rounded-full bg-ink/5 border border-ink/10 hover:bg-ink/10 transition-all active:scale-95" aria-label="Toggle theme">
+              <i data-lucide="moon" class="w-4 h-4 text-ink block dark-icon"></i>
+              <i data-lucide="sun" class="w-4 h-4 text-ink hidden light-icon"></i>
+            </button>
+            <button id="mobile-menu-toggle" class="lg:hidden p-2.5 rounded-full bg-ink/5 border border-ink/10 hover:bg-ink/10 transition-all active:scale-95" aria-label="Toggle mobile menu">
+              <i data-lucide="menu" class="w-4 h-4 text-ink"></i>
+            </button>
+            <a href="/contact.html" class="hidden sm:block bg-accent hover:opacity-90 text-white px-6 py-2.5 rounded-full font-bold text-xs uppercase tracking-widest transition-all active:scale-95 text-center">
+              Start a project
+            </a>
+          </div>
+        </div>
+      </header>
+
+      <!-- Mobile Menu Overlay -->
+      <div id="mobile-menu" class="fixed inset-0 z-[60] bg-bg/95 backdrop-blur-2xl translate-x-full transition-transform duration-500 lg:hidden">
+        <div class="flex flex-col h-full p-12">
+          <div class="flex justify-between items-center mb-24">
+            <a href="/" class="text-2xl font-serif font-bold tracking-tight italic text-ink">OPS Solution</a>
+            <button id="mobile-menu-close" class="p-2.5 rounded-full bg-ink/5 border border-ink/10">
+              <i data-lucide="x" class="w-6 h-6 text-ink"></i>
+            </button>
+          </div>
+          
+          <nav class="flex flex-col gap-8">
+            <a href="/" class="text-4xl font-serif italic text-ink hover:text-accent transition-colors">Home</a>
+            <a href="/about.html" class="text-4xl font-serif italic text-ink hover:text-accent transition-colors">About</a>
+            <div class="flex flex-col gap-4">
+              <span class="text-[10px] font-sans font-bold uppercase tracking-[0.3em] text-muted">Services</span>
+              <div class="flex flex-col gap-4 pl-4 border-l border-ink/10">
+                <a href="/mobile-app.html" class="text-2xl font-serif italic text-ink hover:text-accent transition-colors">Mobile Application</a>
+                <a href="/website-development.html" class="text-2xl font-serif italic text-ink hover:text-accent transition-colors">Website development</a>
+                <a href="/product-design.html" class="text-2xl font-serif italic text-ink hover:text-accent transition-colors">Products design</a>
+              </div>
+            </div>
+            <a href="/contact.html" class="text-4xl font-serif italic text-ink hover:text-accent transition-colors">Contact</a>
+          </nav>
+
+          <div class="mt-auto pt-12 border-t border-ink/10">
+            <a href="/contact.html" class="block w-full bg-accent text-white py-6 rounded-full font-bold text-sm uppercase tracking-widest text-center">
+              Start a project
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <main class="relative z-10 max-w-[1700px] mx-auto px-6 lg:px-32 pt-32 lg:pt-48 pb-24">
+        <div class="grid lg:grid-cols-12 gap-16 lg:gap-32">
+          <!-- Left Side: Content -->
+          <div class="lg:col-span-5">
+            <div class="flex items-center gap-4 mb-8">
+              <div class="h-[1px] w-12 bg-accent"></div>
+              <span class="text-[10px] font-sans font-bold tracking-[0.3em] uppercase text-muted">Project Inquiry</span>
+            </div>
+            <h1 class="text-4xl lg:text-8xl font-serif italic leading-[0.9] mb-12 text-ink">
+              Let's build <br />
+              <span class="text-accent-light">something great.</span>
+            </h1>
+            <p class="text-muted font-light text-sm lg:text-xl leading-relaxed mb-12">
+              Tell us about your vision. Whether it's a new app, a website, or a complete digital transformation, we're here to help you architect the future.
+            </p>
+
+            <div class="space-y-12">
+              <div class="flex items-start gap-6">
+                <div class="w-12 h-12 rounded-2xl bg-accent/10 border border-accent/20 flex items-center justify-center shrink-0">
+                  <i data-lucide="check-circle-2" class="w-6 h-6 text-accent"></i>
+                </div>
+                <div>
+                  <h4 class="text-lg font-serif italic text-ink mb-2">Expert Consultation</h4>
+                  <p class="text-xs lg:text-base text-muted font-light">Get direct insights from our lead architects and engineers.</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-6">
+                <div class="w-12 h-12 rounded-2xl bg-accent/10 border border-accent/20 flex items-center justify-center shrink-0">
+                  <i data-lucide="clock" class="w-6 h-6 text-accent"></i>
+                </div>
+                <div>
+                  <h4 class="text-lg font-serif italic text-ink mb-2">Fast Response</h4>
+                  <p class="text-xs lg:text-base text-muted font-light">We typically respond to new inquiries within 24 hours.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Side: Form -->
+          <div class="lg:col-span-7">
+            <div class="bg-ink/[0.02] backdrop-blur-xl border border-ink/10 rounded-[3rem] p-8 lg:p-16 relative overflow-hidden">
+              <div class="absolute top-0 right-0 w-64 h-64 bg-accent/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2"></div>
+              
+              <form class="relative z-10 space-y-10">
+                <!-- Service Selection -->
+                <div class="space-y-6">
+                  <label class="text-[10px] font-sans font-bold uppercase tracking-[0.2em] text-muted">What are you looking for?</label>
+                  <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                    <label class="cursor-pointer group">
+                      <input type="checkbox" class="hidden peer" name="service" value="mobile">
+                      <div class="p-4 rounded-2xl border border-ink/10 bg-bg/50 text-center transition-all peer-checked:border-accent peer-checked:bg-accent/5 group-hover:border-accent/50">
+                        <span class="text-[10px] font-sans font-bold uppercase tracking-widest text-muted peer-checked:text-accent">Mobile App</span>
+                      </div>
+                    </label>
+                    <label class="cursor-pointer group">
+                      <input type="checkbox" class="hidden peer" name="service" value="website">
+                      <div class="p-4 rounded-2xl border border-ink/10 bg-bg/50 text-center transition-all peer-checked:border-accent peer-checked:bg-accent/5 group-hover:border-accent/50">
+                        <span class="text-[10px] font-sans font-bold uppercase tracking-widest text-muted peer-checked:text-accent">Website</span>
+                      </div>
+                    </label>
+                    <label class="cursor-pointer group">
+                      <input type="checkbox" class="hidden peer" name="service" value="design">
+                      <div class="p-4 rounded-2xl border border-ink/10 bg-bg/50 text-center transition-all peer-checked:border-accent peer-checked:bg-accent/5 group-hover:border-accent/50">
+                        <span class="text-[10px] font-sans font-bold uppercase tracking-widest text-muted peer-checked:text-accent">Design</span>
+                      </div>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Input Fields -->
+                <div class="grid sm:grid-cols-2 gap-8">
+                  <div class="space-y-2">
+                    <label class="text-[10px] font-sans font-bold uppercase tracking-[0.2em] text-muted ml-4">Full Name</label>
+                    <input type="text" placeholder="John Doe" class="w-full bg-bg/50 border border-ink/10 rounded-2xl px-6 py-4 text-ink placeholder:text-muted/30 focus:outline-none focus:border-accent transition-colors">
+                  </div>
+                  <div class="space-y-2">
+                    <label class="text-[10px] font-sans font-bold uppercase tracking-[0.2em] text-muted ml-4">Email Address</label>
+                    <input type="email" placeholder="john@example.com" class="w-full bg-bg/50 border border-ink/10 rounded-2xl px-6 py-4 text-ink placeholder:text-muted/30 focus:outline-none focus:border-accent transition-colors">
+                  </div>
+                </div>
+
+                <div class="space-y-2">
+                  <label class="text-[10px] font-sans font-bold uppercase tracking-[0.2em] text-muted ml-4">Project Details</label>
+                  <textarea rows="4" placeholder="Tell us about your project goals, timeline, and any specific requirements..." class="w-full bg-bg/50 border border-ink/10 rounded-3xl px-6 py-4 text-ink placeholder:text-muted/30 focus:outline-none focus:border-accent transition-colors resize-none"></textarea>
+                </div>
+
+                <!-- Budget Range -->
+                <div class="space-y-6">
+                  <label class="text-[10px] font-sans font-bold uppercase tracking-[0.2em] text-muted">Budget Range</label>
+                  <div class="flex flex-wrap gap-4">
+                    <label class="cursor-pointer group">
+                      <input type="radio" name="budget" value="5-10k" class="hidden peer">
+                      <div class="px-6 py-3 rounded-full border border-ink/10 bg-bg/50 transition-all peer-checked:border-accent peer-checked:bg-accent/5">
+                        <span class="text-[10px] font-sans font-bold uppercase tracking-widest text-muted peer-checked:text-accent">$5k - $10k</span>
+                      </div>
+                    </label>
+                    <label class="cursor-pointer group">
+                      <input type="radio" name="budget" value="10-25k" class="hidden peer">
+                      <div class="px-6 py-3 rounded-full border border-ink/10 bg-bg/50 transition-all peer-checked:border-accent peer-checked:bg-accent/5">
+                        <span class="text-[10px] font-sans font-bold uppercase tracking-widest text-muted peer-checked:text-accent">$10k - $25k</span>
+                      </div>
+                    </label>
+                    <label class="cursor-pointer group">
+                      <input type="radio" name="budget" value="25k+" class="hidden peer">
+                      <div class="px-6 py-3 rounded-full border border-ink/10 bg-bg/50 transition-all peer-checked:border-accent peer-checked:bg-accent/5">
+                        <span class="text-[10px] font-sans font-bold uppercase tracking-widest text-muted peer-checked:text-accent">$25k+</span>
+                      </div>
+                    </label>
+                  </div>
+                </div>
+
+                <button type="submit" class="w-full bg-accent text-white py-6 rounded-full font-bold text-sm uppercase tracking-[0.2em] hover:opacity-90 transition-all shadow-lg shadow-accent/20 active:scale-95">
+                  Send Inquiry
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- Footer -->
+      <footer class="bg-bg pt-24 lg:pt-32 pb-12 px-6 lg:px-32 border-t border-ink/5">
+        <div class="max-w-[1700px] mx-auto">
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-16 mb-32">
+            <!-- Brand Column -->
+            <div class="md:col-span-4">
+              <div class="text-3xl font-serif font-bold tracking-tight italic mb-8 text-ink">OPS Solution</div>
+              <p class="text-muted font-light text-xs lg:text-lg leading-relaxed max-w-xs">
+                Crafting exceptional digital experiences through technical excellence and creative vision.
+              </p>
+            </div>
+
+            <!-- Links Columns -->
+            <div class="md:col-span-2">
+              <h5 class="text-[10px] font-sans font-bold uppercase tracking-[0.2em] text-ink mb-8">Company</h5>
+              <ul class="space-y-4">
+                <li><a href="/" class="text-sm text-muted hover:text-accent-light transition-colors">Home</a></li>
+                <li><a href="/about.html" class="text-sm text-muted hover:text-accent-light transition-colors">About</a></li>
+                <li><a href="/contact.html" class="text-sm text-muted hover:text-accent-light transition-colors">Contact</a></li>
+                <li><a href="/contact.html" class="text-sm text-muted hover:text-accent-light transition-colors">Start a project</a></li>
+              </ul>
+            </div>
+
+            <div class="md:col-span-2">
+              <h5 class="text-[10px] font-sans font-bold uppercase tracking-[0.2em] text-ink mb-8">Services</h5>
+              <ul class="space-y-4">
+                <li><a href="/mobile-app.html" class="text-sm text-muted hover:text-accent-light transition-colors">Mobile Application</a></li>
+                <li><a href="/website-development.html" class="text-sm text-muted hover:text-accent-light transition-colors">Website Development</a></li>
+                <li><a href="/product-design.html" class="text-sm text-muted hover:text-accent-light transition-colors">Product Design</a></li>
+              </ul>
+            </div>
+
+            <!-- Contact Column -->
+            <div class="md:col-span-4">
+              <h5 class="text-[10px] font-sans font-bold uppercase tracking-[0.2em] text-ink mb-8">Connect</h5>
+              <div class="space-y-6">
+                <a href="mailto:hello@opssolution.com" class="block text-2xl font-serif italic hover:text-accent-light transition-colors text-ink">hello@opssolution.com</a>
+                <div class="flex gap-6">
+                  <a href="#" class="w-10 h-10 rounded-full border border-ink/10 flex items-center justify-center hover:bg-accent hover:border-accent transition-all text-ink">
+                    <i data-lucide="twitter" class="w-4 h-4"></i>
+                  </a>
+                  <a href="#" class="w-10 h-10 rounded-full border border-ink/10 flex items-center justify-center hover:bg-accent hover:border-accent transition-all text-ink">
+                    <i data-lucide="linkedin" class="w-4 h-4"></i>
+                  </a>
+                  <a href="#" class="w-10 h-10 rounded-full border border-ink/10 flex items-center justify-center hover:bg-accent hover:border-accent transition-all text-ink">
+                    <i data-lucide="instagram" class="w-4 h-4"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Bar -->
+          <div class="pt-12 border-t border-ink/5 flex flex-col md:flex-row justify-between items-center gap-8">
+            <div class="text-[10px] font-sans uppercase tracking-widest text-muted">
+              © 2026 OPS Solution. All rights reserved.
+            </div>
+            <div class="flex gap-8">
+              <a href="#" class="text-[10px] font-sans uppercase tracking-widest text-muted hover:text-ink transition-colors">Privacy Policy</a>
+              <a href="#" class="text-[10px] font-sans uppercase tracking-widest text-muted hover:text-ink transition-colors">Terms of Service</a>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

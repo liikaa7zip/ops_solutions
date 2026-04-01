@@ -1,0 +1,849 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Design | OPS Solution</title>
+    <link rel="stylesheet" href="/src/index.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+      .design-canvas {
+        background-image: radial-gradient(circle, rgba(56, 189, 248, 0.1) 1px, transparent 1px);
+        background-size: 20px 20px;
+      }
+      
+      .prototype-node {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      
+      .prototype-node:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+      }
+
+      .floating-element {
+        animation: float 6s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-15px); }
+      }
+
+      .design-tool-card {
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      
+      .design-tool-card:hover {
+        transform: translateY(-8px);
+        border-color: #38bdf8;
+        background: rgba(56, 189, 248, 0.05);
+      }
+
+      .color-swatch {
+        width: 100%;
+        height: 60px;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+
+      .color-swatch:hover {
+        transform: scale(1.02);
+      }
+
+      .system-component {
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+    </style>
+  </head>
+  <body class="bg-bg text-ink antialiased overflow-x-hidden">
+    <div class="relative min-h-screen">
+      <!-- Background Elements -->
+      <div class="fixed inset-0 noise-bg pointer-events-none z-0"></div>
+      <div class="fixed inset-0 grid-bg opacity-20 pointer-events-none z-0"></div>
+      <div class="fixed inset-0 bg-[radial-gradient(circle_at_90%_10%,rgba(56, 189, 248, 0.1)_0%,transparent_70%)] pointer-events-none z-0"></div>
+      
+      <!-- Header -->
+      <header class="fixed top-0 w-full z-50 flex items-center justify-between px-12 lg:px-32 py-4 transition-all duration-500">
+        <div class="flex items-center gap-12 max-w-[1400px] mx-auto w-full justify-between">
+          <div class="flex items-center gap-12">
+            <div class="width-12 h-8 flex items-center justify-center">
+            <img class="width-32 h-38 flex items-center justify-center" src="/src/assets/images/logo.png" alt="OPS Solution Logo">
+            </div>
+            <nav class="nav-container hidden lg:flex items-center gap-6">
+              <a href="/" class="nav-item font-sans text-[10px] uppercase tracking-widest">Home</a>
+              <a href="/about.html" class="nav-item font-sans text-[10px] uppercase tracking-widest">About</a>
+              <div class="dropdown">
+                <a href="#" class="nav-item has-dropdown active font-sans text-[10px] uppercase tracking-widest">Services</a>
+                <div class="dropdown-menu">
+                  <a href="/mobile-app.html" class="dropdown-item">Mobile Application</a>
+                  <a href="/website-development.html" class="dropdown-item">Website development</a>
+                  <a href="/product-design.html" class="dropdown-item active">Products design</a>
+                </div>
+              </div>
+              <a href="/contact.html" class="nav-item font-sans text-[10px] uppercase tracking-widest">Contact</a>
+            </nav>
+          </div>
+
+          <div class="flex items-center gap-4">
+            <button id="theme-toggle" class="p-2.5 rounded-full bg-ink/5 border border-ink/10 hover:bg-ink/10 transition-all active:scale-95" aria-label="Toggle theme">
+              <i data-lucide="moon" class="w-4 h-4 text-ink block dark-icon"></i>
+              <i data-lucide="sun" class="w-4 h-4 text-ink hidden light-icon"></i>
+            </button>
+            <button id="mobile-menu-toggle" class="lg:hidden p-2.5 rounded-full bg-ink/5 border border-ink/10 hover:bg-ink/10 transition-all active:scale-95" aria-label="Toggle mobile menu">
+              <i data-lucide="menu" class="w-4 h-4 text-ink"></i>
+            </button>
+            <a href="/contact.html" class="hidden sm:block bg-accent hover:opacity-90 text-white px-6 py-2.5 rounded-full font-bold text-xs uppercase tracking-widest transition-all active:scale-95 text-center">
+              Start a project
+            </a>
+          </div>
+        </div>
+      </header>
+
+      <!-- Mobile Menu Overlay -->
+      <div id="mobile-menu" class="fixed inset-0 z-[60] bg-bg/95 backdrop-blur-2xl translate-x-full transition-transform duration-500 lg:hidden">
+        <div class="flex flex-col h-full p-12">
+          <div class="flex justify-between items-center mb-24">
+            <a href="/" class="text-2xl font-serif font-bold tracking-tight italic text-ink">OPS Solution</a>
+            <button id="mobile-menu-close" class="p-2.5 rounded-full bg-ink/5 border border-ink/10">
+              <i data-lucide="x" class="w-6 h-6 text-ink"></i>
+            </button>
+          </div>
+          <nav class="flex flex-col gap-8">
+            <a href="/" class="text-4xl font-serif italic text-ink">Home</a>
+            <a href="/about.html" class="text-4xl font-serif italic text-ink">About</a>
+            <div class="flex flex-col gap-4">
+              <span class="text-[10px] uppercase tracking-widest text-muted">Services</span>
+              <a href="/mobile-app.html" class="text-2xl font-serif italic text-ink pl-4">Mobile Application</a>
+              <a href="/website-development.html" class="text-2xl font-serif italic text-ink pl-4">Website Development</a>
+              <a href="/product-design.html" class="text-2xl font-serif italic text-accent pl-4">Product Design</a>
+            </div>
+            <a href="/contact.html" class="text-4xl font-serif italic text-ink hover:text-accent transition-colors">Contact</a>
+          </nav>
+
+          <div class="mt-auto pt-12 border-t border-ink/10">
+            <a href="/contact.html" class="block w-full bg-accent text-white py-6 rounded-full font-bold text-sm uppercase tracking-widest text-center">
+              Start a project
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero Section -->
+      <section class="relative pt-48 pb-32 px-12 lg:px-32 overflow-hidden">
+        <!-- Atmospheric Background -->
+        <div class="atmospheric-banner"></div>
+        <div class="atmospheric-banner-extra"></div>
+        
+        <div class="max-w-[1400px] mx-auto grid lg:grid-cols-2 gap-24 items-center relative z-10">
+          <div class="reveal">
+            <div class="flex items-center gap-4 mb-8">
+              <div class="w-12 h-[1px] bg-accent"></div>
+              <span class="text-[10px] font-sans font-bold tracking-[0.4em] uppercase text-accent">UI/UX Strategy</span>
+            </div>
+            
+            <h1 class="text-5xl lg:text-8xl font-serif italic mb-8 text-ink leading-[0.9] tracking-tighter">
+              Crafting <br />
+              <span class="text-accent">Digital</span> <br />
+              Experiences
+            </h1>
+            
+            <p class="text-muted text-xs lg:text-xl font-light mb-12 leading-relaxed max-w-xl">
+              We bridge the gap between human needs and digital possibilities through intuitive, research-driven product design.
+            </p>
+
+            <div class="flex flex-wrap gap-6">
+              <button class="bg-ink text-bg px-8 py-4 rounded-full font-bold text-xs uppercase tracking-widest hover:opacity-90 transition-all active:scale-95">
+                View Portfolio
+              </button>
+              <button class="group flex items-center gap-4 text-ink font-bold text-xs uppercase tracking-widest">
+                Our Process
+                <div class="w-10 h-10 rounded-full border border-ink/10 flex items-center justify-center group-hover:bg-ink group-hover:text-bg transition-all">
+                  <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </div>
+              </button>
+            </div>
+          </div>
+
+          <div class="relative hidden lg:block reveal">
+            <div class="absolute -inset-24 bg-accent/10 rounded-full blur-[120px] pointer-events-none"></div>
+            <div class="relative z-10 grid grid-cols-2 gap-6">
+              <div class="space-y-6">
+                <div class="floating-element bg-bg border border-ink/10 p-8 rounded-[2rem] shadow-2xl shadow-accent/5">
+                  <div class="w-12 h-12 rounded-2xl bg-accent/10 flex items-center justify-center mb-6">
+                    <i data-lucide="mouse-pointer-2" class="w-6 h-6 text-accent"></i>
+                  </div>
+                  <h3 class="text-xl font-serif italic mb-2">Interaction</h3>
+                  <p class="text-xs text-muted leading-relaxed">Defining how users move through your product with intent.</p>
+                </div>
+                <div class="floating-element bg-bg border border-ink/10 p-8 rounded-[2rem] shadow-2xl shadow-accent/5" style="animation-delay: -2s;">
+                  <div class="w-12 h-12 rounded-2xl bg-purple-500/10 flex items-center justify-center mb-6">
+                    <i data-lucide="layers" class="w-6 h-6 text-purple-500"></i>
+                  </div>
+                  <h3 class="text-xl font-serif italic mb-2">Systems</h3>
+                  <p class="text-xs text-muted leading-relaxed">Building scalable design languages for consistent growth.</p>
+                </div>
+              </div>
+              <div class="space-y-6 pt-12">
+                <div class="floating-element bg-bg border border-ink/10 p-8 rounded-[2rem] shadow-2xl shadow-accent/5" style="animation-delay: -4s;">
+                  <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 flex items-center justify-center mb-6">
+                    <i data-lucide="users" class="w-6 h-6 text-emerald-500"></i>
+                  </div>
+                  <h3 class="text-xl font-serif italic mb-2">Research</h3>
+                  <p class="text-xs text-muted leading-relaxed">Validating every design decision with real user insights.</p>
+                </div>
+                <div class="floating-element bg-bg border border-ink/10 p-8 rounded-[2rem] shadow-2xl shadow-accent/5" style="animation-delay: -1s;">
+                  <div class="w-12 h-12 rounded-2xl bg-orange-500/10 flex items-center justify-center mb-6">
+                    <i data-lucide="layout" class="w-6 h-6 text-orange-500"></i>
+                  </div>
+                  <h3 class="text-xl font-serif italic mb-2">Interface</h3>
+                  <p class="text-xs text-muted leading-relaxed">Creating beautiful, high-fidelity visuals that inspire.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Design Philosophy Section -->
+      <section class="py-32 px-12 lg:px-32 bg-bg text-ink relative overflow-hidden">
+        <div class="absolute inset-0 grid-bg opacity-10 pointer-events-none"></div>
+        <div class="max-w-[1400px] mx-auto relative z-10">
+          <div class="mb-24 reveal">
+            <h2 class="font-serif text-3xl lg:text-[56px] leading-[1.1] mb-6 tracking-tighter">
+              Design that <br /> 
+              <span class="text-accent">solves problems </span>
+            </h2>
+            <p class="text-xs lg:text-lg text-ink/60 font-light leading-relaxed max-w-xl">
+              We don't just make things look pretty. We design systems that drive engagement, conversion, and long-term user loyalty.
+            </p>
+          </div>
+
+          <div class="grid lg:grid-cols-3 gap-12">
+            <!-- Point 01: User-Centricity -->
+            <div class="reveal group relative p-8 rounded-[2.5rem] bg-ink/5 border border-ink/5 hover:border-accent/30 transition-all duration-500 overflow-hidden">
+              <div class="absolute -right-8 -top-8 w-32 h-32 bg-accent/5 rounded-full blur-3xl group-hover:bg-accent/10 transition-all"></div>
+              <div class="text-6xl font-serif italic text-accent/20 mb-8 group-hover:text-accent transition-colors">01</div>
+              <h3 class="text-2xl font-serif italic mb-4">User-Centricity</h3>
+              <p class="text-sm text-ink/60 leading-relaxed mb-8">Every pixel is placed with the user in mind. We prioritize accessibility and ease of use above all else.</p>
+              
+              <!-- Visual Proof: User Focus -->
+              <div class="relative h-32 bg-bg/50 rounded-2xl border border-ink/5 overflow-hidden p-4">
+                <div class="absolute inset-0 flex items-center justify-center opacity-20">
+                  <div class="w-full h-full grid-bg"></div>
+                </div>
+                <div class="relative z-10 flex flex-col gap-2">
+                  <div class="w-full h-2 bg-accent/20 rounded-full overflow-hidden">
+                    <div class="w-3/4 h-full bg-accent animate-pulse"></div>
+                  </div>
+                  <div class="flex gap-2">
+                    <div class="w-8 h-8 rounded-full bg-accent/10 border border-accent/20 flex items-center justify-center">
+                      <div class="w-2 h-2 rounded-full bg-accent animate-ping"></div>
+                    </div>
+                    <div class="flex-1 space-y-2">
+                      <div class="h-2 w-1/2 bg-ink/10 rounded-full"></div>
+                      <div class="h-2 w-full bg-ink/5 rounded-full"></div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Heatmap effect -->
+                <div class="absolute bottom-[-20px] right-[-20px] w-24 h-24 bg-accent/20 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-1000"></div>
+              </div>
+            </div>
+
+            <!-- Point 02: Aesthetic Logic -->
+            <div class="reveal group relative p-8 rounded-[2.5rem] bg-ink/5 border border-ink/5 hover:border-accent/30 transition-all duration-500 overflow-hidden" style="transition-delay: 100ms;">
+              <div class="absolute -right-8 -top-8 w-32 h-32 bg-accent/5 rounded-full blur-3xl group-hover:bg-accent/10 transition-all"></div>
+              <div class="text-6xl font-serif italic text-accent/20 mb-8 group-hover:text-accent transition-colors">02</div>
+              <h3 class="text-2xl font-serif italic mb-4">Aesthetic Logic</h3>
+              <p class="text-sm text-ink/60 leading-relaxed mb-8">Beauty is a function. A clean, balanced interface builds trust and reduces cognitive load for your users.</p>
+              
+              <!-- Visual Proof: Grid & Alignment -->
+              <div class="relative h-32 bg-bg/50 rounded-2xl border border-ink/5 overflow-hidden flex items-center justify-center gap-4">
+                <div class="absolute inset-0 border-[0.5px] border-accent/10 grid-bg opacity-40"></div>
+                <!-- Alignment lines -->
+                <div class="absolute top-0 bottom-0 left-1/2 w-[1px] bg-accent/20 group-hover:bg-accent/40 transition-colors"></div>
+                <div class="absolute left-0 right-0 top-1/2 h-[1px] bg-accent/20 group-hover:bg-accent/40 transition-colors"></div>
+                
+                <div class="relative z-10 w-12 h-12 bg-bg border border-accent/30 rounded-lg flex items-center justify-center group-hover:rotate-45 transition-transform duration-700">
+                  <div class="w-6 h-6 border border-accent/50 rounded-sm"></div>
+                </div>
+                <div class="relative z-10 w-12 h-12 bg-bg border border-accent/30 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-700">
+                  <div class="w-4 h-4 bg-accent/20 rounded-full"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Point 03: Scalable Systems -->
+            <div class="reveal group relative p-8 rounded-[2.5rem] bg-ink/5 border border-ink/5 hover:border-accent/30 transition-all duration-500 overflow-hidden" style="transition-delay: 200ms;">
+              <div class="absolute -right-8 -top-8 w-32 h-32 bg-accent/5 rounded-full blur-3xl group-hover:bg-accent/10 transition-all"></div>
+              <div class="text-6xl font-serif italic text-accent/20 mb-8 group-hover:text-accent transition-colors">03</div>
+              <h3 class="text-2xl font-serif italic mb-4">Scalable Systems</h3>
+              <p class="text-sm text-ink/60 leading-relaxed mb-8">We build design systems, not just pages. This ensures your product can grow without losing its visual identity.</p>
+              
+              <!-- Visual Proof: Components -->
+              <div class="relative h-32 bg-bg/50 rounded-2xl border border-ink/5 overflow-hidden p-4 flex flex-col gap-3">
+                <div class="flex gap-2">
+                  <div class="px-3 py-1 bg-accent text-bg text-[8px] font-bold rounded-full group-hover:bg-ink transition-colors uppercase tracking-widest">Button</div>
+                  <div class="px-3 py-1 border border-accent/30 text-accent text-[8px] font-bold rounded-full uppercase tracking-widest">Outline</div>
+                </div>
+                <div class="flex gap-2 items-center">
+                  <div class="w-4 h-4 rounded-sm bg-accent/20 border border-accent/30"></div>
+                  <div class="h-1 flex-1 bg-accent/10 rounded-full"></div>
+                </div>
+                <div class="flex gap-2 items-center">
+                  <div class="w-4 h-4 rounded-full bg-accent/20 border border-accent/30"></div>
+                  <div class="h-1 flex-1 bg-accent/10 rounded-full"></div>
+                </div>
+                <!-- Propagation effect -->
+                <div class="absolute inset-0 bg-accent/5 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                  <div class="text-[10px] font-mono text-accent">--primary: #38bdf8;</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Design Process Section -->
+      <section class="py-32 px-12 lg:px-32 bg-bg relative overflow-hidden">
+        <div class="max-w-[1200px] mx-auto">
+          <div class="text-center mb-32 reveal">
+            <div class="text-[9px] font-sans font-bold uppercase tracking-[0.4em] text-accent mb-4">Our Methodology</div>
+            <h2 class="font-serif text-3xl lg:text-[64px] tracking-tighter leading-tight mb-6">
+              How we <span class="text-accent italic">design</span> it
+            </h2>
+            <p class="text-muted text-sm max-w-xl mx-auto font-light leading-relaxed">
+              A systematic approach to solving complex problems through research, logic, and high-fidelity execution.
+            </p>
+          </div>
+
+          <div class="relative space-y-32 lg:space-y-64">
+            <!-- Vertical Progress Line -->
+            <div class="absolute left-1/2 top-0 bottom-0 w-[1px] bg-ink/5 hidden lg:block -translate-x-1/2">
+              <div class="absolute top-0 left-0 w-full bg-accent h-0 group-hover:h-full transition-all duration-1000 origin-top"></div>
+            </div>
+
+            <!-- Step 01: Discover -->
+            <div class="relative grid lg:grid-cols-2 gap-16 items-center reveal">
+              <div class="order-2 lg:order-1 lg:text-right">
+                <div class="inline-block px-4 py-1 rounded-full bg-accent/10 text-accent text-[10px] font-bold uppercase tracking-widest mb-6">Phase 01</div>
+                <h3 class="text-3xl lg:text-5xl font-serif italic mb-6">Discover</h3>
+                <p class="text-muted text-sm lg:text-base leading-relaxed mb-8 lg:ml-auto max-w-md">
+                  We start by diving deep into your business, market, and user needs. Through research and audits, we uncover the core challenges and opportunities.
+                </p>
+                <ul class="space-y-3 text-[11px] font-sans font-bold uppercase tracking-widest text-ink/40 lg:ml-auto">
+                  <li>User Research</li>
+                  <li>Market Analysis</li>
+                  <li>Stakeholder Interviews</li>
+                </ul>
+              </div>
+              <div class="order-1 lg:order-2 relative group">
+                <div class="absolute -inset-4 bg-accent/5 rounded-[2rem] scale-95 group-hover:scale-100 transition-transform duration-700"></div>
+                <div class="relative aspect-square lg:aspect-video bg-ink/5 border border-ink/10 rounded-[2rem] overflow-hidden p-8 flex items-center justify-center">
+                  <!-- Visual: Research Board (Active Scanning) -->
+                  <div class="w-full h-full relative overflow-hidden">
+                    <!-- Scanning line -->
+                    <div class="absolute top-0 left-0 w-full h-[2px] bg-accent/40 blur-sm animate-[scan_3s_ease-in-out_infinite] z-20"></div>
+                    
+                    <div class="absolute top-4 left-4 w-24 h-24 bg-accent/10 rounded-xl border border-accent/20 rotate-[-12deg] p-3 animate-[float_4s_ease-in-out_infinite]">
+                      <div class="w-full h-1 bg-accent/30 rounded-full mb-2"></div>
+                      <div class="w-2/3 h-1 bg-accent/20 rounded-full"></div>
+                    </div>
+                    <div class="absolute top-12 right-8 w-20 h-20 bg-bg border border-ink/10 rounded-xl shadow-xl rotate-[8deg] p-3 animate-[float_5s_ease-in-out_infinite_0.5s]">
+                      <div class="w-8 h-8 rounded-full bg-accent/5 border border-accent/10 mx-auto mb-2"></div>
+                      <div class="w-full h-1 bg-ink/5 rounded-full"></div>
+                    </div>
+                    <div class="absolute bottom-8 left-1/4 w-32 h-16 bg-accent text-bg rounded-xl shadow-2xl flex items-center justify-center font-bold text-[10px] uppercase tracking-widest group-hover:scale-110 transition-transform duration-500">
+                      <span class="relative">
+                        Insights
+                        <span class="absolute -top-1 -right-1 w-2 h-2 bg-bg rounded-full animate-ping"></span>
+                      </span>
+                    </div>
+                    
+                    <!-- Data particles -->
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full opacity-20 pointer-events-none">
+                      <div class="absolute top-10 left-20 w-1 h-1 bg-accent rounded-full animate-pulse"></div>
+                      <div class="absolute bottom-20 right-20 w-1 h-1 bg-accent rounded-full animate-pulse [animation-delay:1s]"></div>
+                      <div class="absolute top-1/2 right-1/4 w-1 h-1 bg-accent rounded-full animate-pulse [animation-delay:2s]"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 02: Define -->
+            <div class="relative grid lg:grid-cols-2 gap-16 items-center reveal">
+              <div class="relative group">
+                <div class="absolute -inset-4 bg-accent/5 rounded-[2rem] scale-95 group-hover:scale-100 transition-transform duration-700"></div>
+                <div class="relative aspect-square lg:aspect-video bg-ink/5 border border-ink/10 rounded-[2rem] overflow-hidden p-8 flex items-center justify-center">
+                  <!-- Visual: User Flow (Active Mapping) -->
+                  <div class="w-full h-full relative flex items-center justify-center">
+                    <!-- Central Node -->
+                    <div class="relative z-20">
+                      <div class="w-16 h-16 rounded-full border-2 border-accent flex items-center justify-center bg-bg shadow-[0_0_30px_rgba(56,189,248,0.2)] group-hover:scale-110 transition-transform duration-500">
+                        <div class="w-6 h-6 rounded-full bg-accent animate-pulse"></div>
+                      </div>
+                      <!-- Rotating ring -->
+                      <div class="absolute -inset-4 border border-accent/10 rounded-full animate-[spin_8s_linear_infinite]"></div>
+                      <div class="absolute -inset-4 border-t border-accent/40 rounded-full animate-[spin_3s_linear_infinite]"></div>
+                    </div>
+
+                    <!-- Branching Lines & Nodes -->
+                    <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                      <!-- Branch 1 (Top) -->
+                      <div class="absolute w-32 h-[1px] bg-accent/10 origin-left rotate-[-35deg] translate-x-8">
+                        <div class="absolute inset-0 bg-accent w-0 group-hover:w-full transition-all duration-700 delay-100 ease-out"></div>
+                        <div class="absolute right-0 -top-4 w-8 h-8 rounded-lg border border-accent/20 bg-bg flex items-center justify-center rotate-[35deg] opacity-0 group-hover:opacity-100 transition-all duration-500 delay-700 translate-x-4 group-hover:translate-x-0">
+                          <div class="w-2 h-2 rounded-full bg-accent/40 animate-pulse"></div>
+                        </div>
+                      </div>
+                      
+                      <!-- Branch 2 (Middle) -->
+                      <div class="absolute w-40 h-[1px] bg-accent/10 origin-left rotate-[0deg] translate-x-8">
+                        <div class="absolute inset-0 bg-accent w-0 group-hover:w-full transition-all duration-700 delay-300 ease-out"></div>
+                        <div class="absolute right-0 -top-5 w-10 h-10 rounded-xl border border-accent/30 bg-bg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 delay-900 translate-x-4 group-hover:translate-x-0 shadow-lg">
+                          <i data-lucide="git-branch" class="w-4 h-4 text-accent animate-pulse"></i>
+                        </div>
+                      </div>
+                      
+                      <!-- Branch 3 (Bottom) -->
+                      <div class="absolute w-32 h-[1px] bg-accent/10 origin-left rotate-[35deg] translate-x-8">
+                        <div class="absolute inset-0 bg-accent w-0 group-hover:w-full transition-all duration-700 delay-500 ease-out"></div>
+                        <div class="absolute right-0 -top-4 w-8 h-8 rounded-lg border border-accent/20 bg-bg flex items-center justify-center rotate-[-35deg] opacity-0 group-hover:opacity-100 transition-all duration-500 delay-1100 translate-x-4 group-hover:translate-x-0">
+                          <div class="w-2 h-2 rounded-full bg-accent/40 animate-pulse"></div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <!-- Floating Logic Particles -->
+                    <div class="absolute inset-0 pointer-events-none">
+                      <div class="absolute top-1/4 left-1/3 w-1 h-1 bg-accent rounded-full animate-ping"></div>
+                      <div class="absolute bottom-1/3 right-1/4 w-1.5 h-1.5 bg-accent/40 rounded-full animate-pulse [animation-delay:1.5s]"></div>
+                      <div class="absolute top-2/3 left-1/4 w-1 h-1 bg-accent/60 rounded-full animate-ping [animation-delay:0.7s]"></div>
+                    </div>
+
+                    <!-- Label -->
+                    <div class="absolute bottom-6 left-1/2 -translate-x-1/2 text-[9px] font-mono text-accent/60 uppercase tracking-[0.2em] opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+                      Architecture Mapping
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div class="inline-block px-4 py-1 rounded-full bg-accent/10 text-accent text-[10px] font-bold uppercase tracking-widest mb-6">Phase 02</div>
+                <h3 class="text-3xl lg:text-5xl font-serif italic mb-6">Define</h3>
+                <p class="text-muted text-sm lg:text-base leading-relaxed mb-8 max-w-md">
+                  We translate insights into strategy. By mapping user flows and information architecture, we define the blueprint for the final product.
+                </p>
+                <ul class="space-y-3 text-[11px] font-sans font-bold uppercase tracking-widest text-ink/40">
+                  <li>User Personas</li>
+                  <li>Information Architecture</li>
+                  <li>Strategic Roadmap</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Step 03: Design -->
+            <div class="relative grid lg:grid-cols-2 gap-16 items-center reveal">
+              <div class="order-2 lg:order-1 lg:text-right">
+                <div class="inline-block px-4 py-1 rounded-full bg-accent/10 text-accent text-[10px] font-bold uppercase tracking-widest mb-6">Phase 03</div>
+                <h3 class="text-3xl lg:text-5xl font-serif italic mb-6">Design</h3>
+                <p class="text-muted text-sm lg:text-base leading-relaxed mb-8 lg:ml-auto max-w-md">
+                  This is where logic meets beauty. We craft high-fidelity interfaces and robust design systems that are both stunning and functional.
+                </p>
+                <ul class="space-y-3 text-[11px] font-sans font-bold uppercase tracking-widest text-ink/40 lg:ml-auto">
+                  <li>UI Design</li>
+                  <li>Design Systems</li>
+                  <li>Visual Identity</li>
+                </ul>
+              </div>
+              <div class="order-1 lg:order-2 relative group">
+                <div class="absolute -inset-4 bg-accent/5 rounded-[2rem] scale-95 group-hover:scale-100 transition-transform duration-700"></div>
+                <div class="relative aspect-square lg:aspect-video bg-ink/5 border border-ink/10 rounded-[2rem] overflow-hidden p-8 flex items-center justify-center">
+                  <!-- Visual: UI Workbench (Active Crafting) -->
+                  <div class="w-full h-full relative flex flex-col gap-4">
+                    <div class="flex gap-2">
+                      <div class="w-4 h-4 rounded-full bg-accent animate-bounce"></div>
+                      <div class="w-4 h-4 rounded-full bg-accent/40 animate-bounce [animation-delay:0.2s]"></div>
+                      <div class="w-4 h-4 rounded-full bg-accent/10 animate-bounce [animation-delay:0.4s]"></div>
+                    </div>
+                    <div class="flex-1 bg-bg border border-ink/10 rounded-xl p-4 space-y-4 relative overflow-hidden">
+                      <!-- Drawing cursor -->
+                      <div class="absolute top-4 left-4 w-4 h-4 text-accent animate-[draw_4s_linear_infinite] z-20">
+                        <i data-lucide="pen-tool" class="w-full h-full"></i>
+                      </div>
+                      
+                      <div class="h-4 w-1/2 bg-accent/10 rounded-full relative overflow-hidden">
+                        <div class="absolute inset-0 bg-accent/20 w-0 group-hover:w-full transition-all duration-1000"></div>
+                      </div>
+                      <div class="grid grid-cols-2 gap-4">
+                        <div class="h-24 bg-ink/5 rounded-lg border border-transparent group-hover:border-accent/20 transition-colors relative overflow-hidden">
+                           <div class="absolute inset-0 bg-accent/5 translate-y-full group-hover:translate-y-0 transition-transform duration-700"></div>
+                        </div>
+                        <div class="h-24 bg-ink/5 rounded-lg border border-transparent group-hover:border-accent/20 transition-colors relative overflow-hidden">
+                           <div class="absolute inset-0 bg-accent/5 translate-y-full group-hover:translate-y-0 transition-transform duration-700 [transition-delay:0.2s]"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 04: Prototype -->
+            <div class="relative grid lg:grid-cols-2 gap-16 items-center reveal">
+              <div class="relative group">
+                <div class="absolute -inset-4 bg-accent/5 rounded-[2rem] scale-95 group-hover:scale-100 transition-transform duration-700"></div>
+                <div class="relative aspect-square lg:aspect-video bg-ink/5 border border-ink/10 rounded-[2rem] overflow-hidden p-8 flex items-center justify-center">
+                  <!-- Visual: Motion Canvas (Interactive Simulation) -->
+                  <div class="w-32 h-64 bg-bg border-4 border-ink/10 rounded-[2.5rem] relative p-4 overflow-hidden shadow-2xl group-hover:border-accent/30 transition-colors">
+                    <div class="w-12 h-1 bg-ink/10 rounded-full mx-auto mb-6"></div>
+                    
+                    <!-- Simulated Interaction -->
+                    <div class="space-y-4 relative">
+                      <div class="w-full h-24 bg-accent/5 rounded-xl border border-accent/10 flex items-center justify-center overflow-hidden">
+                        <div class="w-12 h-12 bg-accent/20 rounded-full group-hover:scale-[3] transition-transform duration-1000"></div>
+                      </div>
+                      <div class="w-full h-10 bg-accent rounded-xl flex items-center justify-center text-[8px] font-bold text-bg uppercase tracking-widest group-hover:bg-ink transition-colors">
+                        Action
+                      </div>
+                      
+                      <!-- Virtual Cursor -->
+                      <div class="absolute -bottom-4 right-0 w-6 h-6 text-accent/60 animate-[click_3s_ease-in-out_infinite] z-20">
+                        <i data-lucide="mouse-pointer-2" class="w-full h-full"></i>
+                      </div>
+                    </div>
+                    
+                    <div class="absolute bottom-6 left-1/2 -translate-x-1/2 w-10 h-10 rounded-full border-2 border-accent/10 flex items-center justify-center">
+                      <div class="w-3 h-3 rounded-full bg-accent animate-ping"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div class="inline-block px-4 py-1 rounded-full bg-accent/10 text-accent text-[10px] font-bold uppercase tracking-widest mb-6">Phase 04</div>
+                <h3 class="text-3xl lg:text-5xl font-serif italic mb-6">Prototype</h3>
+                <p class="text-muted text-sm lg:text-base leading-relaxed mb-8 max-w-md">
+                  We bring designs to life. Interactive prototypes allow us to test motion, transitions, and the overall feel of the product before development.
+                </p>
+                <ul class="space-y-3 text-[11px] font-sans font-bold uppercase tracking-widest text-ink/40">
+                  <li>Interactive Prototypes</li>
+                  <li>Motion Design</li>
+                  <li>Micro-interactions</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Step 05: Validate -->
+            <div class="relative grid lg:grid-cols-2 gap-16 items-center reveal">
+              <div class="order-2 lg:order-1 lg:text-right">
+                <div class="inline-block px-4 py-1 rounded-full bg-accent/10 text-accent text-[10px] font-bold uppercase tracking-widest mb-6">Phase 05</div>
+                <h3 class="text-3xl lg:text-5xl font-serif italic mb-6">Validate</h3>
+                <p class="text-muted text-sm lg:text-base leading-relaxed mb-8 lg:ml-auto max-w-md">
+                  We don't guess, we test. Through user testing and feedback loops, we ensure the product meets the highest standards of quality and usability.
+                </p>
+                <ul class="space-y-3 text-[11px] font-sans font-bold uppercase tracking-widest text-ink/40 lg:ml-auto">
+                  <li>User Testing</li>
+                  <li>Accessibility Audit</li>
+                  <li>Developer Handoff</li>
+                </ul>
+              </div>
+              <div class="order-1 lg:order-2 relative group">
+                <div class="absolute -inset-4 bg-accent/5 rounded-[2rem] scale-95 group-hover:scale-100 transition-transform duration-700"></div>
+                <div class="relative aspect-square lg:aspect-video bg-ink/5 border border-ink/10 rounded-[2rem] overflow-hidden p-8 flex items-center justify-center">
+                  <!-- Visual: Testing Dashboard (Live Feedback) -->
+                  <div class="w-full h-full relative flex flex-col items-center justify-center gap-8">
+                    <!-- Radar/Pulse effect -->
+                    <div class="relative">
+                      <div class="flex gap-6 relative z-10">
+                        <div class="w-16 h-16 rounded-full bg-green-500/10 border border-green-500/20 flex items-center justify-center group-hover:bg-green-500/20 transition-colors">
+                          <i data-lucide="check" class="w-8 h-8 text-green-500 animate-bounce"></i>
+                        </div>
+                        <div class="w-16 h-16 rounded-full bg-accent/10 border border-accent/20 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
+                          <i data-lucide="users" class="w-8 h-8 text-accent animate-pulse"></i>
+                        </div>
+                      </div>
+                      <div class="absolute -inset-8 border border-accent/5 rounded-full animate-[spin_10s_linear_infinite]"></div>
+                      <div class="absolute -inset-12 border border-accent/5 rounded-full animate-[spin_15s_linear_infinite_reverse]"></div>
+                    </div>
+                    
+                    <div class="w-full max-w-[240px] space-y-2">
+                      <div class="flex justify-between text-[8px] font-mono text-accent/60 uppercase tracking-widest">
+                        <span>Validation Score</span>
+                        <span>92%</span>
+                      </div>
+                      <div class="w-full h-2 bg-ink/5 rounded-full overflow-hidden">
+                        <div class="w-0 group-hover:w-[92%] h-full bg-accent transition-all duration-1000 ease-out"></div>
+                      </div>
+                    </div>
+                    
+                    <div class="absolute bottom-4 right-4 flex gap-1">
+                      <div class="w-1 h-3 bg-accent/40 rounded-full animate-[grow_1s_ease-in-out_infinite]"></div>
+                      <div class="w-1 h-5 bg-accent/40 rounded-full animate-[grow_1s_ease-in-out_infinite_0.2s]"></div>
+                      <div class="w-1 h-2 bg-accent/40 rounded-full animate-[grow_1s_ease-in-out_infinite_0.4s]"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Design Excellence Section (Interactive) -->
+      <section class="hidden lg:block pt-16 pb-8 px-12 lg:px-32 relative overflow-hidden bg-bg border-b border-ink/5">
+        <div class="absolute inset-0 grid-bg opacity-[0.03] pointer-events-none"></div>
+        <div class="max-w-[1400px] mx-auto grid lg:grid-cols-2 gap-16 items-start relative z-10">
+          <!-- Left: Design System Simulator -->
+          <div class="hidden lg:flex relative reveal flex-col items-center lg:self-start min-h-[650px]">
+            <div class="absolute -inset-24 bg-accent/5 rounded-full blur-[120px] pointer-events-none"></div>
+            
+            <div id="system-simulator" class="w-full max-w-md bg-bg border border-ink/10 rounded-[2.5rem] shadow-2xl p-8 space-y-8">
+              <!-- Simulator Header -->
+              <div class="flex justify-between items-center">
+                <div class="text-[10px] font-sans font-bold uppercase tracking-widest text-muted">Design System v1.0</div>
+                <div class="flex gap-2">
+                  <div class="w-2 h-2 rounded-full bg-red-400"></div>
+                  <div class="w-2 h-2 rounded-full bg-yellow-400"></div>
+                  <div class="w-2 h-2 rounded-full bg-green-400"></div>
+                </div>
+              </div>
+
+              <!-- Color Palette -->
+              <div class="space-y-4">
+                <h5 class="text-xs font-bold uppercase tracking-widest text-ink">Primary Palette</h5>
+                <div class="grid grid-cols-4 gap-3">
+                  <div onclick="updateSystemTheme('#38bdf8')" class="color-swatch bg-[#38bdf8]"></div>
+                  <div onclick="updateSystemTheme('#8b5cf6')" class="color-swatch bg-[#8b5cf6]"></div>
+                  <div onclick="updateSystemTheme('#10b981')" class="color-swatch bg-[#10b981]"></div>
+                  <div onclick="updateSystemTheme('#f59e0b')" class="color-swatch bg-[#f59e0b]"></div>
+                </div>
+              </div>
+
+              <!-- Components Preview -->
+              <div class="space-y-6 pt-4">
+                <h5 class="text-xs font-bold uppercase tracking-widest text-ink">Component Preview</h5>
+                
+                <!-- Button Component -->
+                <div class="p-6 rounded-2xl bg-ink/5 border border-ink/5 space-y-4">
+                  <div class="flex justify-between items-center">
+                    <span class="text-[10px] text-muted uppercase">Button</span>
+                    <span class="text-[10px] text-muted uppercase">Active</span>
+                  </div>
+                  <button id="sim-button" class="system-component w-full py-3 rounded-xl bg-accent text-white font-bold text-xs uppercase tracking-widest shadow-lg shadow-accent/20">
+                    Action Button
+                  </button>
+                </div>
+
+                <!-- Card Component -->
+                <div class="p-6 rounded-2xl bg-ink/5 border border-ink/5 space-y-4">
+                  <div class="flex justify-between items-center">
+                    <span class="text-[10px] text-muted uppercase">Card</span>
+                    <span class="text-[10px] text-muted uppercase">Hover</span>
+                  </div>
+                  <div id="sim-card" class="system-component p-4 rounded-xl bg-bg border-l-4 border-accent shadow-sm">
+                    <div class="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center mb-3">
+                      <i data-lucide="star" id="sim-icon" class="w-4 h-4 text-accent"></i>
+                    </div>
+                    <div class="h-2 w-2/3 bg-ink/10 rounded-full mb-2"></div>
+                    <div class="h-2 w-1/2 bg-ink/5 rounded-full"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Content -->
+          <div class="reveal">
+            <div class="flex items-center gap-4 mb-8">
+              <div class="w-12 h-[1px] bg-accent"></div>
+              <span class="text-[10px] font-sans font-bold tracking-[0.3em] uppercase text-muted">Design Excellence</span>
+            </div>
+            
+            <h2 class="font-serif text-3xl lg:text-[45px] italic mb-6 text-ink leading-tight">
+              Systematic <br />
+              <span class="text-accent">Thinking</span>
+            </h2>
+            
+            <p class="text-muted text-xs lg:text-base font-light mb-8 leading-relaxed max-w-xl">
+              We build living design systems that ensure your product remains consistent, accessible, and easy to maintain as it evolves.
+            </p>
+
+            <div class="grid gap-4">
+              <!-- Control 1 -->
+              <div class="group flex items-center justify-between p-4 rounded-2xl bg-ink/5 border border-ink/10 transition-all text-left w-full">
+                <div class="flex items-center gap-4">
+                  <div class="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center">
+                    <i data-lucide="palette" class="w-5 h-5 text-accent"></i>
+                  </div>
+                  <div>
+                    <h4 class="text-base font-serif italic text-ink">Dynamic Themes</h4>
+                    <p class="text-[10px] text-muted">Switch colors to see system-wide updates.</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Control 2 -->
+              <div class="group flex items-center justify-between p-4 rounded-2xl bg-ink/5 border border-ink/10 transition-all text-left w-full">
+                <div class="flex items-center gap-4">
+                  <div class="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center">
+                    <i data-lucide="component" class="w-5 h-5 text-accent"></i>
+                  </div>
+                  <div>
+                    <h4 class="text-base font-serif italic text-ink">Atomic Components</h4>
+                    <p class="text-[10px] text-muted">Reusable patterns for faster delivery.</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Control 3 -->
+              <div class="group flex items-center justify-between p-4 rounded-2xl bg-ink/5 border border-ink/10 transition-all text-left w-full">
+                <div class="flex items-center gap-4">
+                  <div class="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center">
+                    <i data-lucide="accessibility" class="w-5 h-5 text-accent"></i>
+                  </div>
+                  <div>
+                    <h4 class="text-base font-serif italic text-ink">Accessibility First</h4>
+                    <p class="text-[10px] text-muted">Inclusive design built into the core.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tools Section -->
+      <section class="py-32 px-12 lg:px-32 bg-bg relative overflow-hidden">
+        <div class="max-w-[1400px] mx-auto">
+          <div class="mb-16 reveal">
+            <div class="text-[9px] font-sans font-bold uppercase tracking-[0.4em] text-accent mb-4">Our Toolkit</div>
+            <h2 class="font-serif text-3xl lg:text-[56px] leading-[1.1] mb-6 tracking-tighter">
+              The modern <br /> 
+              <span class="text-accent">design stack </span>
+            </h2>
+            <p class="text-xs lg:text-lg text-muted font-light leading-relaxed max-w-lg">
+              We use industry-leading tools to create high-fidelity prototypes and seamless handoffs.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="design-tool-card p-8 rounded-[2rem] bg-ink/5 border border-ink/10 flex flex-col items-center text-center reveal">
+              <div class="w-16 h-16 rounded-2xl bg-white flex items-center justify-center mb-6 shadow-sm">
+                <img src="https://cdn.simpleicons.org/figma" alt="Figma" class="w-8 h-8" referrerPolicy="no-referrer">
+              </div>
+              <h4 class="text-lg font-serif italic mb-2">Figma</h4>
+              <p class="text-[10px] text-muted uppercase tracking-widest">Interface Design</p>
+            </div>
+            <div class="design-tool-card p-8 rounded-[2rem] bg-ink/5 border border-ink/10 flex flex-col items-center text-center reveal" style="transition-delay: 100ms;">
+              <div class="w-16 h-16 rounded-2xl bg-white flex items-center justify-center mb-6 shadow-sm">
+                <img src="https://cdn.simpleicons.org/framer" alt="Framer" class="w-8 h-8" referrerPolicy="no-referrer">
+              </div>
+              <h4 class="text-lg font-serif italic mb-2">Framer</h4>
+              <p class="text-[10px] text-muted uppercase tracking-widest">Advanced Motion</p>
+            </div>
+            <div class="design-tool-card p-8 rounded-[2rem] bg-ink/5 border border-ink/10 flex flex-col items-center text-center reveal" style="transition-delay: 200ms;">
+              <div class="w-16 h-16 rounded-2xl bg-white flex items-center justify-center mb-6 shadow-sm">
+                <img src="https://cdn.simpleicons.org/adobecreativecloud" alt="Adobe CC" class="w-8 h-8" referrerPolicy="no-referrer">
+              </div>
+              <h4 class="text-lg font-serif italic mb-2">Adobe CC</h4>
+              <p class="text-[10px] text-muted uppercase tracking-widest">Visual Assets</p>
+            </div>
+            <div class="design-tool-card p-8 rounded-[2rem] bg-ink/5 border border-ink/10 flex flex-col items-center text-center reveal" style="transition-delay: 300ms;">
+              <div class="w-16 h-16 rounded-2xl bg-white flex items-center justify-center mb-6 shadow-sm">
+                <img src="https://cdn.simpleicons.org/protopie" alt="ProtoPie" class="w-8 h-8" referrerPolicy="no-referrer">
+              </div>
+              <h4 class="text-lg font-serif italic mb-2">ProtoPie</h4>
+              <p class="text-[10px] text-muted uppercase tracking-widest">Logic Prototyping</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA Section -->
+      <section class="py-32 px-12 lg:px-32 relative overflow-hidden bg-bg">
+        <!-- Atmospheric Background -->
+        <div class="atmospheric-banner opacity-10"></div>
+        <div class="atmospheric-banner-extra opacity-5"></div>
+        
+        <div class="max-w-[1400px] mx-auto text-center relative z-10">
+          <div class="reveal">
+            <h2 class="text-4xl lg:text-7xl font-serif italic mb-8 text-ink leading-tight tracking-tighter">
+              Ready to <span class="text-accent">elevate</span> <br />
+              your product?
+            </h2>
+            <p class="text-muted text-xs lg:text-xl font-light mb-12 max-w-2xl mx-auto">
+              Let's collaborate to build a product that your users will love and your business will thrive on.
+            </p>
+            <a href="/contact.html" class="inline-block bg-accent text-white px-12 py-5 rounded-full font-bold text-sm uppercase tracking-[0.2em] hover:opacity-90 transition-all active:scale-95 shadow-xl shadow-accent/20">
+              Start a project
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="py-24 px-12 lg:px-32 bg-bg text-ink relative overflow-hidden">
+        <div class="max-w-[1400px] mx-auto grid lg:grid-cols-4 gap-16 relative z-10">
+          <div class="lg:col-span-2">
+            <a href="/" class="text-3xl font-serif font-bold tracking-tight italic mb-8 block">OPS Solution</a>
+            <p class="text-bg/40 font-light leading-relaxed max-w-sm mb-12">
+              A specialized digital architecture studio focused on high-performance web engineering and product design.
+            </p>
+            <div class="flex gap-6">
+              <a href="#" class="w-10 h-10 rounded-full border border-bg/10 flex items-center justify-center hover:bg-bg hover:text-ink transition-all">
+                <i data-lucide="instagram" class="w-4 h-4"></i>
+              </a>
+              <a href="#" class="w-10 h-10 rounded-full border border-bg/10 flex items-center justify-center hover:bg-bg hover:text-ink transition-all">
+                <i data-lucide="twitter" class="w-4 h-4"></i>
+              </a>
+              <a href="#" class="w-10 h-10 rounded-full border border-bg/10 flex items-center justify-center hover:bg-bg hover:text-ink transition-all">
+                <i data-lucide="linkedin" class="w-4 h-4"></i>
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <h4 class="text-[10px] uppercase tracking-[0.3em] font-bold mb-8 text-bg/40">Services</h4>
+            <ul class="space-y-4">
+              <li><a href="/mobile-app.html" class="text-sm font-light hover:text-accent transition-colors">Mobile Application</a></li>
+              <li><a href="/website-development.html" class="text-sm font-light hover:text-accent transition-colors">Website Development</a></li>
+              <li><a href="/product-design.html" class="text-sm font-light text-accent">Product Design</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="text-[10px] uppercase tracking-[0.3em] font-bold mb-8 text-bg/40">Company</h4>
+            <ul class="space-y-4">
+              <li><a href="/about.html" class="text-sm font-light hover:text-accent transition-colors">About Us</a></li>
+              <li><a href="/contact.html" class="text-sm font-light hover:text-accent transition-colors">Contact</a></li>
+              <li><a href="#" class="text-sm font-light hover:text-accent transition-colors">Privacy Policy</a></li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="max-w-[1400px] mx-auto mt-24 pt-8 border-t border-bg/5 flex flex-col lg:flex-row justify-between items-center gap-8">
+          <p class="text-[10px] uppercase tracking-widest text-bg/20">© 2026 OPS Solution. All rights reserved.</p>
+          <p class="text-[10px] uppercase tracking-widest text-bg/20">Crafted with precision.</p>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      window.updateSystemTheme = (color) => {
+        const button = document.getElementById('sim-button');
+        const card = document.getElementById('sim-card');
+        const icon = document.getElementById('sim-icon');
+        
+        button.style.backgroundColor = color;
+        button.style.boxShadow = `0 10px 20px ${color}33`;
+        card.style.borderColor = color;
+        icon.style.color = color;
+        icon.parentElement.style.backgroundColor = `${color}1a`;
+      };
+    </script>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
